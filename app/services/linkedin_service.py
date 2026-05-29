@@ -1,6 +1,14 @@
+from app.ai.llm_feed_analyzer import analyze_post
+
+
 def process_post(post):
+
+    analysis = analyze_post(
+        post.content
+    )
+
     return {
-        "message": "Post received successfully",
+        "status": "success",
         "author": post.author,
-        "content": post.content
+        **analysis
     }
