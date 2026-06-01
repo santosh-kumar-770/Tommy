@@ -4,25 +4,29 @@ import ollama
 def generate_replies(conversation_text: str):
 
     prompt = f"""
-You are Veera AI.
+You are a LinkedIn assistant.
 
-Generate exactly 3 reply suggestions for LinkedIn.
+Task:
+Generate exactly 3 reply suggestions.
 
-Rules:
-- Professional tone
-- Simple English
-- Friendly
-- Short (1-2 sentences)
-- Do not roleplay
-- Do not mention Veera
-- Do not mention Person
-- Do not explain
-- Do not number replies
-- One reply per line
+IMPORTANT RULES:
+- Return only the replies.
+- No explanations.
+- No introductions.
+- No analysis.
+- No roleplay.
+- No labels.
+- No numbering.
+- Each reply must be on a new line.
+- Professional tone.
+- Simple English.
+- Maximum 20 words per reply.
 
 Conversation:
 
 {conversation_text}
+
+Replies:
 """
 
     response = ollama.chat(
