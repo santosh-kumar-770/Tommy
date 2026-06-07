@@ -10,6 +10,7 @@ from app.database.database import engine
 from app.database.models import Base
 from app.api.routes.posts import router as posts_router
 from app.api.routes.messages import router as messages_router
+from fastapi.middleware.cors import CORSMiddleware
 
 Base.metadata.create_all(
     bind=engine
@@ -17,6 +18,13 @@ Base.metadata.create_all(
 app = FastAPI(title="Veera Backend")
 scheduler.start()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(health_router)
 app.include_router(linkedin_router, prefix="/linkedin")
