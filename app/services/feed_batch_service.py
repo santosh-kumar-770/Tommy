@@ -1,6 +1,7 @@
 from app.ai.feed_classifier import classify_post
 from app.ranking.feed_ranker import calculate_importance
 from app.services.feed_digest_service import generate_digest
+from app.services.post_service import save_post
 
 
 def process_batch(posts):
@@ -19,13 +20,20 @@ def process_batch(posts):
 
         if importance >= 70:
 
+            save_post(
+                author=post.author,
+                content=post.content,
+                category=category,
+                importance_score=importance
+            )
+
             important_posts.append({
                 "author": post.author,
                 "category": category,
                 "importance_score": importance,
                 "content": post.content,
                 "post_url": post.post_url
-})
+            })
 
     important_posts.sort(
         key=lambda x: x["importance_score"],

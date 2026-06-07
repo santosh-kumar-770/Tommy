@@ -1,6 +1,6 @@
 from app.ai.reply_generator import generate_replies
 from app.services.memory_service import get_memory
-
+from app.services.message_service import save_message
 
 def build_conversation(conversation):
 
@@ -28,6 +28,14 @@ def suggest_replies(data):
     conversation_text = build_conversation(
         data.conversation
     )
+
+    for msg in data.conversation:
+
+        save_message(
+            person_name=data.person_name,
+            sender=msg.sender,
+            message=msg.message
+        )
 
     # IMPORTANT:
     # For now send ONLY conversation to AI.
