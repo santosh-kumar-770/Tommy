@@ -11,6 +11,9 @@ from app.database.models import Base
 from app.api.routes.posts import router as posts_router
 from app.api.routes.messages import router as messages_router
 from fastapi.middleware.cors import CORSMiddleware
+from app.api.routes.telegram import (
+    router as telegram_router
+)
 
 Base.metadata.create_all(
     bind=engine
@@ -64,4 +67,8 @@ app.include_router(
 app.include_router(
     messages_router,
     prefix="/linkedin"
+)
+
+app.include_router(
+    telegram_router
 )
