@@ -1,5 +1,3 @@
-alert("Veera Loaded");
-
 console.log(
     "VEERA CONTENT SCRIPT LOADED"
 );
@@ -32,12 +30,25 @@ chrome.runtime.onMessage.addListener(
                     text.length > 50
                 ) {
 
+                    const authorElement =
+                        post.parentElement
+                            ?.parentElement
+                            ?.querySelector("p");
+
+                    const author =
+                        authorElement?.innerText ||
+                        text.split("\n")[0] ||
+                        "Unknown";
+
+                    console.log(
+                        "Author Found:",
+                        author
+                    );
+
                     posts.push({
-                        author:
-                            "LinkedIn User",
+                        author: author,
                         content: text,
-                        post_url:
-                            window.location.href
+                        post_url: window.location.href
                     });
 
                 }
@@ -74,20 +85,13 @@ chrome.runtime.onMessage.addListener(
                     data
                 );
 
-                alert(
-                    `Important Posts Found: ${data.count}`
-                );
-
                 sendResponse(data);
 
             } catch (error) {
 
                 console.error(
+                    "VEERA ERROR:",
                     error
-                );
-
-                alert(
-                    "Backend Connection Failed"
                 );
 
                 sendResponse({

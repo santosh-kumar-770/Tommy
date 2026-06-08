@@ -1,22 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Veera AI</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
 
+<body>
     <h2>Veera AI</h2>
 
     <button id="scanFeed">
         Scan Feed
     </button>
 
-    <p id="status">
+    <button id="showReplies">
+        Reply Generator
+    </button>
+
+    <div id="status">
         Ready
-    </p>
+    </div>
+
+    <div id="results"></div>
+
+    <div id="replySection" style="display:none;">
+
+        <br>
+
+        <input id="personName" placeholder="Person Name">
+
+        <br><br>
+
+        <textarea id="conversation" rows="6" placeholder="Paste conversation here"></textarea>
+
+        <br><br>
+
+        <button id="generateReplies">
+            Generate Replies
+        </button>
+
+        <div id="replyResults"></div>
+
+    </div>
 
     <script src="popup.js"></script>
-
 </body>
+
 </html>
